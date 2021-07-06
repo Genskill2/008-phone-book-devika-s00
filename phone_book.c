@@ -209,7 +209,20 @@ void list(FILE *db_file) {
   printf("Total entries: %d\n",count);
   free_entries(base);
 }
-
+int search(FILE *db_f,char *name){
+  entry *p=load_entries(db_f);
+  entry *base=p;
+  while(p!=NULL){
+    if(strcmp(p->name,name)==0){
+      printf("%s\n",p->phone);
+      free_entries(base);
+      return 1;
+    }
+    p=p->next;
+  }
+  free_entries(base);
+  return 0;
+}
 
 int delete(FILE *db_file, char *name) {
   entry *p = load_entries(db_file);
